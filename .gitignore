@@ -1,6 +1,7 @@
 /docs/components/api.json
 /docs/pages/dist/
 /docs/img/dist/
+/docs/pages/example/iframe
 node_modules
 *.sublime-*
 .DS_Store

@@ -10,21 +10,25 @@ import Note from '@mapbox/dr-ui/note';
 import { highlightHtml } from '@mapbox/dr-ui/highlight/html';
 import * as helpers from '@mapbox/dr-ui/edit/helpers';
 
-const viewport = `<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />`;
-const css = `\tbody { margin: 0; padding: 0; }
-\t#map { position: absolute; top: 0; bottom: 0; width: 100%; }`;
+const { viewport, css } = require('./example/shared.js');
 
 export default class Example extends React.Component {
-    static defaultProps = {
-        displaySnippet: true,
-        height: 400
-    };
     constructor(props) {
         super(props);
         this.state = {
             token: undefined,
             unsupported: false
         };
+    }
+
+    componentDidMount() {
+        if (!supported()) this.setState({ unsupported: true });
+
+        MapboxPageShell.afterUserCheck(() => {
+            this.setState({
+                token: MapboxPageShell.getUserPublicAccessToken()
+            });
+        });
     }
 
     // Display HTML with production URLs and the logged-in user's access token (if available).
@@ -62,38 +66,6 @@ ${this.addToken(html)}
 </html>`;
     }
 
-    renderHTML(html) {
-        return `<!DOCTYPE html>
-<html>
-<head>
-<meta charset=utf-8 />
-<title>${this.props.frontMatter.title}</title>
-${viewport}
-<script src='https://js.sentry-cdn.com/b4e18cb1943f46289f67ca6a771bd341.min.js' crossorigin="anonymous"></script>
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-instrumentile/v3.0.0/mapbox-gl-instrumentile.js' crossorigin="anonymous"></script>
-
-<script src='${urls.js({ local: true })}'></script>
-<link href='${urls.css({ local: true })}' rel='stylesheet' />
-<style>
-    ${css}
-</style>
-<script>mapboxgl.accessToken = '${MapboxPageShell.getMapboxAccessToken()}'</script>
-</head>
-<body>
-${html}
-</body>
-<script>
-if (window.map instanceof mapboxgl.Map) {
-    var i = new instrumentile(map, {
-        token: '${MapboxPageShell.getMapboxAccessToken()}',
-        api: 'https://api.tiles.mapbox.com',
-        source: 'docs-examples'
-    });
-}
-</script>
-</html>`;
-    }
-
     renderSnippet() {
         const { html, location } = this.props;
         const code = this.displayHTML(html);
@@ -122,7 +94,13 @@ if (window.map instanceof mapboxgl.Map) {
     }
 
     render() {
-        const { frontMatter, height } = this.props;
+        const { frontMatter, height, location } = this.props;
+
+        const iframePath = `/mapbox-gl-js/example/iframe/${
+            location.pathname.split('/')[
+                location.pathname.split('/').length - 2
+            ]
+        }.html`;
 
         return (
             <div className="prose">
@@ -155,9 +133,7 @@ if (window.map instanceof mapboxgl.Map) {
                         allowFullScreen={true}
                         mozallowfullscreen="true"
                         webkitallowfullscreen="true"
-                        ref={(iframe) => {
-                            this.iframe = iframe;
-                        }}
+                        src={iframePath}
                         title={`${frontMatter.title} example`}
                     />
                 )}
@@ -165,22 +141,6 @@ if (window.map instanceof mapboxgl.Map) {
                 {this.props.displaySnippet && this.renderSnippet()}
             </div>
         );
-    }
-
-    componentDidMount() {
-        if (!supported()) this.setState({ unsupported: true });
-
-        if (!this.iframe) return;
-        const doc = this.iframe.contentWindow.document;
-        doc.open();
-        doc.write(this.renderHTML(this.props.html));
-        doc.close();
-
-        MapboxPageShell.afterUserCheck(() => {
-            this.setState({
-                token: MapboxPageShell.getUserPublicAccessToken()
-            });
-        });
     }
 }
 
@@ -195,4 +155,9 @@ Example.propTypes = {
     }),
     displaySnippet: PropTypes.bool,
     height: PropTypes.number
+};
+
+Example.defaultProps = {
+    displaySnippet: true,
+    height: 400
 };
