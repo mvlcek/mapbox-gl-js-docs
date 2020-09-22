@@ -73,6 +73,8 @@ The command will print the URL you can use to view the documentation.
 
 💡 If you receive an error related to `@mapbox/appropriate-images`, try `nvm use && npm start`.
 
+💡 You can use this repo to preview changes to content in the `mapbox-gl-js` submodule. To do this, make your changes to files in the `node_modules` folder, save the files, and then use `npm start` to start the server. You must make your *actual* changes in the [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js) repo, but you can use this process to preview your edits in a web browser. You will not be able to commit your changes to files in the `node_modules` folder.
+
 The examples section of the locally run documentation will use the GL JS version located in `../mapbox-gl-js/dist`,
 so make sure to have a working minified build in your local copy of the `mapbox-gl-js` repo (not the submodule).
 
