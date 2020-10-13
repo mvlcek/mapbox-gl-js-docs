@@ -91,9 +91,7 @@ Requesting styles from Mapbox or other services will require additional directiv
 ```
 connect-src https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com
 ```
-The `events.mapbox.com` endpoint is used to track how many users are active on an account monthly and what versions of GL JS are being used by end-users. 
-
-A response from these event requests is not required in GL JS. If requests to events.mapbox.com are blocked, it will not affect map rendering or the user's experience.
+The `events.mapbox.com` endpoint is used to track how many users are active on an account monthly and what versions of GL JS are being used. If requests to events.mapbox.com are blocked, it will not affect map rendering or the user's experience.
 
 For strict CSP environments without `worker-src blob: ; child-src blob:` enabled, there's a separate Mapbox GL JS bundle (`mapbox-gl-csp.js` and `mapbox-gl-csp-worker.js`) which requires setting the path to the worker manually:
 
