@@ -274,5 +274,11 @@
       "title": "Visualize population density",
       "href": "https://docs.mapbox.com/mapbox-gl-js/example/visualize-population-density/"
     }
+  ],
+  "zoom": [
+    {
+      "title": "Get started with Mapbox GL JS expressions: Add a zoom expression",
+      "href": "https://docs.mapbox.com/help/tutorials/mapbox-gl-js-expressions/#add-a-zoom-expression"
+    }
   ]
 }
