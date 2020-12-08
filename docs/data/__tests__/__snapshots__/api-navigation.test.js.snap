@@ -242,6 +242,21 @@ Array [
       },
       Object {
         "level": 2,
+        "slug": "freecameraoptions",
+        "text": "FreeCameraOptions",
+      },
+      Object {
+        "level": 3,
+        "slug": "freecameraoptions-parameters",
+        "text": "Parameters",
+      },
+      Object {
+        "level": 3,
+        "slug": "freecameraoptions-instance-members",
+        "text": "Instance members",
+      },
+      Object {
+        "level": 2,
         "slug": "paddingoptions",
         "text": "PaddingOptions",
       },
@@ -722,6 +737,11 @@ Array [
         "level": 2,
         "slug": "keyboardhandler",
         "text": "KeyboardHandler",
+      },
+      Object {
+        "level": 3,
+        "slug": "keyboardhandler-instance-members",
+        "text": "Instance members",
       },
       Object {
         "level": 2,
