@@ -9,7 +9,7 @@ products:
 - Mapbox Style Specification
 prependJs:
     - "import Items from '../../components/style-spec/items';"
-    - "import ref from '@mapbox/mapbox-gl-style-spec-private/reference/latest';"
+    - "import ref from '@mapbox/mapbox-gl-style-spec/reference/latest';"
 ---
 
 A style's `terrain` property is a global modifier that elevates layers and markers based on a DEM data source.
