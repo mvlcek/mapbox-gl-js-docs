@@ -210,7 +210,9 @@ This map of Mount Shasta uses a high value for the [`hillshade-exaggeration`](/m
 
 ## sky
 
-A `sky` style layer renders a stylized spherical dome that encompasses the entire map and is automatically rendered behind all layers. This can be used to fill the area above the horizon with a clear simulated sky that represents a particular time-of-day, or stylized custom gradients.
+<!-- copyeditor disable represents -->
+A `sky` style layer renders a stylized spherical dome that encompasses the entire map and is automatically rendered behind all layers. This can be used to fill the area above the horizon with a simulated sky that represents a particular time-of-day, or stylized custom gradients.
+<!-- copyeditor enable represents -->
 
 {{
   <AppropriateImage
